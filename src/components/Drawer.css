@@ -1,0 +1,113 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 360px;
+  height: 100vh;
+  right: 0;
+  background: white;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: scroll;
+  scrollbar-width: none; /*firefox*/
+}
+
+/*chrome*/
+.drawer::-webkit-scrollbar {
+  display: none;
+}
+
+.ordersList {
+  flex: 1;
+}
+
+.ordersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer > h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.orderItem__info > p {
+  font-size: 16px;
+}
+
+.orderItem__info > b {
+  font-size: 14px;
+}
+
+.removeBtn {
+  width: 30px;
+  height: 30px;
+  color: rgb(129, 129, 129);
+  cursor: pointer;
+  border: 1px solid #f3f3f3;
+  border-radius: 100%;
+  opacity: 0.5;
+}
+
+.removeBtn:hover {
+  opacity: 1;
+}
+
+.ordersTotal {
+  display: flex;
+  flex-direction: column;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.totalPrice > div {
+  display: flex;
+  flex: 0.9;
+  height: 1px;
+  position: relative;
+  top: -3px;
+  border-bottom: 1px dashed #dfdfdf;
+}
+
+.totalTax {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.totalTax > div {
+  display: flex;
+  flex: 0.9;
+  height: 1px;
+  position: relative;
+  top: -3px;
+  border-bottom: 1px dashed #dfdfdf;
+}
+
+.orderItem {
+  margin-top: 30px;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

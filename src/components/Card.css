@@ -1,0 +1,46 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  padding: 20px;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+.card > img {
+  background-color: orange;
+}
+
+.card > h5 {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardInfo > p {
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.cardBottom {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardBottom > button {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}

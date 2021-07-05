@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  border-radius: 100%;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.headerRight {
+  display: flex;
+}
+
+.userBill {
+  display: flex;
+  align-items: center;
+}
+
+.headerInfo > h3 {
+  text-transform: uppercase;
+}
+
+.headerInfo > p {
+  opacity: 0.5;
+}
