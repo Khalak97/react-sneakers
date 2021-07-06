@@ -7,12 +7,31 @@ import SearchIcon from "@material-ui/icons/Search";
 
 function Home({
   items,
+  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchInput,
   onAddToFavorite,
   onAddToCart,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const filtredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    return (isLoading ? [...Array(4)] : filtredItems).map((item, index) => (
+      <Card
+        key={index}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
+
   return (
     <div className="content">
       <div className="contentSearch">
@@ -34,21 +53,7 @@ function Home({
           />
         </div>
       </div>
-
-      <div className="cards">
-        {items
-          .filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item, index) => (
-            <Card
-              key={index}
-              onFavorite={(obj) => onAddToFavorite(obj)}
-              onPlus={(obj) => onAddToCart(obj)}
-              {...item}
-            />
-          ))}
-      </div>
+      <div className="cards">{renderItems()}</div>
     </div>
   );
 }

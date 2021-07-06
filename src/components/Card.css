@@ -12,10 +12,6 @@
   transform: translateY(-5px);
 }
 
-.card > img {
-  background-color: orange;
-}
-
 .card > h5 {
   margin-top: 20px;
   font-weight: 400;

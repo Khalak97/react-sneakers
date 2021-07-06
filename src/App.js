@@ -17,6 +17,7 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
@@ -56,23 +57,19 @@ function App() {
   };
 
   useEffect(() => {
-    // fetch(`${MOCK_API}/items`)
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((json) => {
-    //     setItems(json);
-    //   });
+    async function fetchData() {
+      const cartResponse = await axios.get(`${MOCK_API}/cart`);
+      const favoritesResponse = await axios.get(`${MOCK_API}/favorites`);
+      const itemsResponse = await axios.get(`${MOCK_API}/items`);
 
-    axios.get(`${MOCK_API}/items`).then((res) => {
-      setItems(res.data);
-    });
-    axios.get(`${MOCK_API}/cart`).then((res) => {
-      setCartItems(res.data);
-    });
-    axios.get(`${MOCK_API}/favorites`).then((res) => {
-      setFavorites(res.data);
-    });
+      setIsLoading(false);
+
+      setCartItems(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setItems(itemsResponse.data);
+    }
+
+    fetchData();
   }, []);
 
   return (
@@ -90,11 +87,13 @@ function App() {
       <Route path="/" exact>
         <Home
           items={items}
+          cartItems={cartItems}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           onChangeSearchInput={onChangeSearchInput}
           onAddToFavorite={onAddToFavorite}
           onAddToCart={onAddToCart}
+          isLoading={isLoading}
         />
       </Route>
 
