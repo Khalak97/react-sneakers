@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Card.css";
+
+import AppContext from "../context";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
@@ -14,15 +16,13 @@ function Card({
   onFavorite,
   onPlus,
   favorited = false,
-  added = false,
-  loading = true,
+  loading = false,
 }) {
-  const [isAdded, setIsAdded] = useState(added);
+  const { isItemAdded } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickPlus = () => {
     onPlus({ id, title, imageUrl, price });
-    setIsAdded(!isAdded);
   };
 
   const onClickFavorite = () => {
@@ -72,7 +72,7 @@ function Card({
               <b>${price}</b>
             </div>
 
-            {isAdded === !true ? (
+            {isItemAdded(id) === !true ? (
               <AddIcon
                 onClick={onClickPlus}
                 style={{

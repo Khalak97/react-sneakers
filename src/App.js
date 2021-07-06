@@ -80,8 +80,8 @@ function App() {
         items,
         cartItems,
         favorites,
-        onAddToFavorite,
         isItemAdded,
+        onAddToFavorite,
         setCartOpened,
         setCartItems,
       }}
