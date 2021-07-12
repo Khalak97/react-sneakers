@@ -41,11 +41,15 @@ function App() {
   };
 
   const onAddToCart = (obj) => {
-    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-      axios.delete(`${MOCK_API}/cart/${obj.id}`);
+    const findItem = cartItems.find(
+      (item) => Number(item.parentId) === Number(obj.id)
+    );
+
+    if (findItem) {
       setCartItems((prev) =>
-        prev.filter((item) => Number(item.id) !== Number(obj.id))
+        prev.filter((item) => Number(item.parentId) !== Number(obj.id))
       );
+      axios.delete(`${MOCK_API}/cart/${findItem.id}`);
     } else {
       axios.post(`${MOCK_API}/cart`, obj);
       setCartItems((prev) => [...prev, obj]);
@@ -54,7 +58,9 @@ function App() {
 
   const onRemoveItem = (id) => {
     axios.delete(`${MOCK_API}/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prev) =>
+      prev.filter((item) => Number(item.id) !== Number(id))
+    );
   };
 
   const onAddToFavorite = async (obj) => {
@@ -74,7 +80,7 @@ function App() {
   };
 
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
