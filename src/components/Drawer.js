@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./Drawer.css";
+import axios from "axios";
+
+import Info from "./Info";
+
+import AppContext from "../context";
 
 import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
 
 function Drawer({ onClose, onRemove, items = [] }) {
+  const { cartItems, setCartItems } = useContext(AppContext);
+  const [orderId, setOrderId] = useState(null);
+  const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        `https://60dead56abbdd9001722cf88.mockapi.io/orders`,
+        {
+          items: cartItems,
+        }
+      );
+      setOrderId(data.id);
+      setIsOrderCompleted(true);
+      setCartItems([]);
+    } catch (error) {
+      alert("Error");
+    }
+    setIsLoading(false);
+  };
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -38,38 +66,39 @@ function Drawer({ onClose, onRemove, items = [] }) {
               </div>
             ))
           ) : (
-            <p
-              style={{
-                fontSize: "40px",
-                marginTop: "100px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Cart is empty
-            </p>
+            <Info
+              description={
+                isOrderCompleted
+                  ? `You made an order, your order id:${orderId}`
+                  : "Cart is empty"
+              }
+            />
           )}
         </div>
-
-        <div className="ordersTotal">
-          <div className="totalPrice">
-            <p>Total:</p>
-            <div></div>
-            <b>$200</b>
+        {items.length > 0 ? (
+          <div className="ordersTotal">
+            <div className="totalPrice">
+              <p>Total:</p>
+              <div></div>
+              <b>$200</b>
+            </div>
+            <div className="totalTax">
+              <p>Tax:</p>
+              <div></div>
+              <b>$40</b>
+            </div>
+            <Button
+              onClick={onClickOrder}
+              disabled={isLoading}
+              variant="outlined"
+              style={{ width: "100%", borderRadius: "20px" }}
+            >
+              Order now
+            </Button>
           </div>
-          <div className="totalTax">
-            <p>Tax:</p>
-            <div></div>
-            <b>$40</b>
-          </div>
-          <Button
-            variant="outlined"
-            style={{ width: "100%", borderRadius: "20px" }}
-          >
-            Order now
-          </Button>
-        </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

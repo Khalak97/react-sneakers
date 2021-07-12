@@ -27,7 +27,6 @@ function App() {
       const itemsResponse = await axios.get(`${MOCK_API}/items`);
 
       setIsLoading(false);
-
       setCartItems(cartResponse.data);
       setFavorites(favoritesResponse.data);
       setItems(itemsResponse.data);
@@ -59,8 +58,11 @@ function App() {
 
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorites.find((favObj) => favObj.id === obj.id)) {
+      if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
         axios.delete(`${MOCK_API}/favorites/${obj.id}`);
+        setFavorites((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
       } else {
         const { data } = await axios.post(`${MOCK_API}/favorites`, obj);
         setFavorites((prev) => [...prev, data]);
