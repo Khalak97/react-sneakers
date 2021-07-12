@@ -6,8 +6,6 @@ import { useCart } from "../hooks/useCart";
 
 import Info from "./Info";
 
-import AppContext from "../context";
-
 import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
 

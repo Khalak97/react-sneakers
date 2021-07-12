@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
@@ -52,14 +52,16 @@ function Header({ onClickCart }) {
           />
         </Link>
 
-        <AccountCircleIcon
-          style={{
-            fontSize: 30,
-            color: "#c0c0c0",
-            margin: "10px",
-            cursor: "pointer",
-          }}
-        />
+        <Link to="/orders">
+          <AccountCircleIcon
+            style={{
+              fontSize: 30,
+              color: "#c0c0c0",
+              margin: "10px",
+              cursor: "pointer",
+            }}
+          />
+        </Link>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import "./Card.css";
 
 import AppContext from "../context";
 
+import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
 import DoneIcon from "@material-ui/icons/Done";
@@ -40,29 +41,17 @@ function Card({
         </div>
       ) : (
         <>
-          {isFavorite === !true ? (
-            <FavoriteIcon
-              onClick={onClickFavorite}
-              style={{
-                fontSize: 40,
-                color: "#c0c0c0",
-                position: "absolute",
-                padding: "10px",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <FavoriteIcon
-              onClick={onClickFavorite}
-              style={{
-                fontSize: 40,
-                color: "orange",
-                position: "absolute",
-                padding: "10px",
-                cursor: "pointer",
-              }}
-            />
-          )}
+          <FavoriteIcon
+            onClick={onClickFavorite}
+            style={{
+              display: onFavorite ? "block" : "none",
+              fontSize: 40,
+              color: isFavorite === !true ? "#c0c0c0" : "orange",
+              position: "absolute",
+              padding: "10px",
+              cursor: "pointer",
+            }}
+          />
 
           <img src={imageUrl} width={180} height={180} alt="title" />
           <h5>{title}</h5>
@@ -76,6 +65,7 @@ function Card({
               <AddIcon
                 onClick={onClickPlus}
                 style={{
+                  display: onPlus ? "block" : "none",
                   fontSize: 40,
                   color: "#cecece",
                   cursor: "pointer",
@@ -87,6 +77,7 @@ function Card({
               <DoneIcon
                 onClick={onClickPlus}
                 style={{
+                  display: onPlus ? "block" : "none",
                   fontSize: 40,
                   color: "#1a9900",
                   cursor: "pointer",
