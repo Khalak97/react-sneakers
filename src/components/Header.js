@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+
+import { useCart } from "../hooks/useCart";
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 function Header({ onClickCart }) {
+  const { totalPrice } = useCart();
+
   return (
     <div className="header">
       <div className="headerLeft">
@@ -34,7 +38,7 @@ function Header({ onClickCart }) {
               cursor: "pointer",
             }}
           />
-          <b style={{ cursor: "pointer" }}>$1000</b>
+          <b style={{ cursor: "pointer" }}>${totalPrice}</b>
         </div>
 
         <Link to="/favorites">

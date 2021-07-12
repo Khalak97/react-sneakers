@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import "./Drawer.css";
 import axios from "axios";
 
+import { useCart } from "../hooks/useCart";
+
 import Info from "./Info";
 
 import AppContext from "../context";
@@ -10,10 +12,10 @@ import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
 
 function Drawer({ onClose, onRemove, items = [] }) {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems, totalPrice } = useCart();
   const [orderId, setOrderId] = useState(null);
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onClickOrder = async () => {
     try {
@@ -80,12 +82,12 @@ function Drawer({ onClose, onRemove, items = [] }) {
             <div className="totalPrice">
               <p>Total:</p>
               <div></div>
-              <b>$200</b>
+              <b>${totalPrice}</b>
             </div>
             <div className="totalTax">
               <p>Tax:</p>
               <div></div>
-              <b>$40</b>
+              <b>${totalPrice * 0.05}</b>
             </div>
             <Button
               onClick={onClickOrder}
