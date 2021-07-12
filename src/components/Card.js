@@ -3,7 +3,6 @@ import "./Card.css";
 
 import AppContext from "../context";
 
-import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
 import DoneIcon from "@material-ui/icons/Done";
